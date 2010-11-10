@@ -1,0 +1,25 @@
+openssh-blacklist (0.4.1) list of default blacklisted OpenSSH RSA and DSA keys
+openssh-blacklist-extra (0.4.1) list of non-default blacklisted OpenSSH RSA and DSA keys
+openssh-client (1:5.3p1-3ubuntu3) secure shell (SSH) client, for secure access to remote machines
+openssh-client-udeb (1:5.3p1-3ubuntu3) secure shell client for the Debian installer
+openssh-server (1:5.3p1-3ubuntu3) secure shell (SSH) server, for secure access from remote machines
+openssh-server-udeb (1:5.3p1-3ubuntu3) secure shell server for the Debian installer
+apache2-utils (2.2.14-5ubuntu8.2) [security] utility programs for webservers
+apache2.2-bin (2.2.14-5ubuntu8.2) [security] Apache HTTP Server common binary files
+apache2.2-common (2.2.14-5ubuntu8.2) [security] Apache HTTP Server common files
+apachetop (0.12.6-12ubuntu3) [universe] Realtime Apache monitoring tool
+mysql-admin (5.0r14+openSUSE-2build1) [universe] GUI tool for intuitive MySQL administration
+mysql-client (5.1.41-3ubuntu12.3) [security] MySQL database client (metapackage depending on the latest version)
+mysql-client-5.1 (5.1.41-3ubuntu12.3) [security] MySQL database client binaries
+mysql-client-core-5.1 (5.1.41-3ubuntu12.3) [security] MySQL database core client binaries
+mysql-server (5.1.41-3ubuntu12.3) [security] MySQL database server (metapackage depending on the latest version)
+php5 (5.3.2-1ubuntu4.5) [security] server-side, HTML-embedded scripting language (metapackage)
+phpmyadmin (4:3.3.2-1) [universe] MySQL web administration tool
+nginx (0.7.65-1ubuntu2) [universe] small, but very powerful and efficient web server and mail proxy
+mythtv (0.23.0+fixes24158-0ubuntu2) [multiverse] A personal video recorder application (client and server)
+mythtv-backend (0.23.0+fixes24158-0ubuntu2) [multiverse] A personal video recorder application (server)
+mythtv-backend-master (0.23.0+fixes24158-0ubuntu2) [multiverse] Metapackage to setup and configure a "Master Backend" profile of MythTV.
+mythtv-common (0.23.0+fixes24158-0ubuntu2) [multiverse] A personal video recorder application (common data)
+mythtv-database (0.23.0+fixes24158-0ubuntu2) [multiverse] A personal video recorder application (database)
+rsync (3.0.7-1ubuntu1) fast remote file copy program (like rcp)
+rsyncrypto (1.12-1) [universe] rsync friendly encryption
