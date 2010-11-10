@@ -16,7 +16,7 @@ int main( void )
 	printf("\n\n\t\t\t15C TEAM PROJECT\n\n");
 	
 	listHead = initHashBST();
-
+	loadData(listHead);
 	menuManager( listHead );
 
     printf("\n");
