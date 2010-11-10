@@ -59,15 +59,15 @@ void deletePackage ( HEADER* listHeader );
 HEADER* initHashBST ( void );
 
 // Hash Functions
-void insertHash ( void );
-void hashSearch ( void );
-void listHash ( void );
-void hashEff ( void );
+void insertHash ( PACKAGE* package );
+void hashSearch ( PACKAGE* package );
+void listHash ( HEADER* listHeader );
+void hashEff ( HEADER* listHeader );
 
 //BST Functions
-void insertTree ( void );
-void listTree ( void );
-void printTree ( void );
+void insertTree ( PACKAGE* package );
+void listTree ( HEADER* listHeader );
+void printTree ( HEADER* listHeader );
 
 // File I/O Functions
-void writeFile ( void );
+void writeFile ( HEADER* listHeader );
