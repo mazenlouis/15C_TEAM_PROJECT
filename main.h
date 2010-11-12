@@ -15,6 +15,7 @@ main.h - main header
 #define FLUSH while (getchar () != '\n')
 #define MEM_ERR printf( "Not enough memory\n" ), exit(201)
 #define BUCKETSIZE 3
+#define INPUTFILE "test-packages.txt"
 
 // Data Structures
 typedef struct package {
@@ -24,20 +25,15 @@ typedef struct package {
 	char *description;  // software description
 } PACKAGE;
 
-typedef struct bucket {
-	char* key;
-	PACKAGE* ptrPackage;
-} BUCKET;
-
 typedef struct hash {
 	int buckets_used;
-	BUCKET bucket[BUCKETSIZE];
+	PACKAGE *bucket[BUCKETSIZE];
 } HASH;
 
 typedef struct bstnode {
-	PACKAGE* ptrPackage;
-	struct node* left;
-	struct node* right;
+	PACKAGE *ptrPackage;
+	struct node *left;
+	struct node *right;
 } BSTNODE;
 
 typedef struct header {
@@ -57,6 +53,7 @@ void loadData ( HEADER* listHeader );
 void addPackage ( HEADER* listHeader );
 void deletePackage ( HEADER* listHeader );
 HEADER* initHashBST ( void );
+int insertPackage ( PACKAGE* );
 
 // Hash Functions
 void insertHash ( PACKAGE* package );
@@ -71,3 +68,4 @@ void printTree ( HEADER* listHeader );
 
 // File I/O Functions
 void writeFile ( HEADER* listHeader );
+PACKAGE *allocatePackage(char *packageNameTemp, char *versionTemp, int levelTemp, char *descriptionTemp);
