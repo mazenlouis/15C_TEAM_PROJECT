@@ -19,9 +19,9 @@ main.h - main header
 
 // Data Structures
 typedef struct package {
-	char *packageName;  // software package title – primary key
+	char *name;  // software package title – primary key
 	char *version; // version
-	int level;  // 0 – Undefined, 1 - Main, 2 - Restricted, 3 - Universe, 4 – Multiverse ; indicates license and level of support
+	char *level; // indicates license and level of support
 	char *description;  // software description
 } PACKAGE;
 
@@ -68,4 +68,8 @@ void printTree ( HEADER* listHeader );
 
 // File I/O Functions
 void writeFile ( HEADER* listHeader );
-PACKAGE *allocatePackage(char *packageNameTemp, char *versionTemp, int levelTemp, char *descriptionTemp);
+PACKAGE *allocatePackage( char *packageNameTemp, char *versionTemp, char* levelTemp, char *descriptionTemp);
+int parseLine (char *line, char *packageNameTemp, char *versionTemp, char *levelTemp, char *descriptionTemp);
+
+// Screen Output Functions
+int printPackage ( PACKAGE *package );

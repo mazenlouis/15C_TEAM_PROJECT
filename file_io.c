@@ -11,13 +11,13 @@
 */
 void loadData ( HEADER* listHeader )
 {
-	PACKAGE* Package;
+	PACKAGE* package;
 	FILE* fpIn;
-	char line[300];
-	char packageNameTemp[99];
-	char versionTemp[99];
-	char descriptionTemp[99];
-	int levelTemp = 0;
+	char line[300] = { '\0' };
+	char packageNameTemp[100] = { '\0' };
+	char versionTemp[100] = { '\0' };
+	char levelTemp[100] = { '\0' };
+	char descriptionTemp[300] = { '\0' };
 
 	fpIn = fopen(INPUTFILE, "r");
 	if(!fpIn)
@@ -27,18 +27,24 @@ void loadData ( HEADER* listHeader )
 	{
 		if( parseLine( line, packageNameTemp, versionTemp, levelTemp, descriptionTemp ))
 		{
-			//Package = allocatePackage(packageNameTemp, versionTemp, levelTemp, descriptionTemp);
-			printf("%s\n", line);
-			//insertTree(Package);
-			//insertHash(Package);
-		}
-			
+			package = allocatePackage(packageNameTemp, versionTemp, levelTemp, descriptionTemp);
+			//insertPackage( package ); // insertPackage function goes here
+		}	
 	}
 	fclose(fpIn);
 	return;
 } // end loadData
 
-PACKAGE *allocatePackage( char *packageNameTemp, char *versionTemp, int levelTemp, char *descriptionTemp)
+/*  ===================== allocatePackage ======================
+	This function allocates a package and copies static strings to dynamic strings
+		Pre:	packageNameTemp	- package name char ary
+				versionTemp		- version char ary
+				levelTemp		- level char ary
+				descriptionTemp	- desciption char ary
+		Post:	allocatedPackage - dynamic package ptr
+		Return: returns a ptr to dynamic package struct
+*/
+PACKAGE *allocatePackage( char *packageNameTemp, char *versionTemp, char* levelTemp, char *descriptionTemp)
 {
 	// local definitions
 	PACKAGE *allocatedPackage = NULL;
@@ -48,31 +54,55 @@ PACKAGE *allocatePackage( char *packageNameTemp, char *versionTemp, int levelTem
 	if(!allocatedPackage)
 		MEM_ERR;
 
-	allocatedPackage->packageName = (char*) calloc (strlen (packageNameTemp) + 1 , sizeof (char));
-	if(!allocatedPackage->packageName)
+	allocatedPackage->name = (char*) calloc (strlen (packageNameTemp) + 1 , sizeof (char));
+	if(!allocatedPackage->name)
 		MEM_ERR;
 
 	allocatedPackage->version = (char*) calloc (strlen (versionTemp) + 1 , sizeof (char));
 	if(!allocatedPackage->version)
 		MEM_ERR;
 
+	allocatedPackage->level = (char*) calloc (strlen (levelTemp) + 1 , sizeof (char));
+	if(!allocatedPackage->level)
+		MEM_ERR;
+
 	allocatedPackage->description = (char*) calloc (strlen (descriptionTemp) + 1 , sizeof (char));
 	if(!allocatedPackage->description)
 		MEM_ERR;
 
-	strcpy(allocatedPackage->packageName, packageNameTemp);
+	strcpy(allocatedPackage->name, packageNameTemp);
 	strcpy(allocatedPackage->version, versionTemp);
-	allocatedPackage->level = levelTemp;
+	strcpy(allocatedPackage->level, levelTemp);
 	strcpy(allocatedPackage->description, descriptionTemp);
 	
 	return allocatedPackage;
-}
+} // allocatePackage
 
-int parseLine (char *line, char *packageNameTemp, char *versionTemp, int levelTemp, char *descriptionTemp)
+/*  ===================== parseLine ======================
+	This function takes a char string line from an ubuntu package
+	repository list and parses it to individual strings.
+		Pre:	line	- line to be parsed - char ary
+		Post:	packageNameTemp	- package name char ary
+				versionTemp		- version char ary
+				levelTemp		- level char ary
+				descriptionTemp	- desciption char ary
+		Return:	returns 1 if successful, 0 if not
+*/
+int parseLine (char *line, char *packageNameTemp, char *versionTemp, char *levelTemp, char *descriptionTemp)
 {
+	// local definitions
 	int success = 1;
-	char tempLevel[99];
-	sscanf( line, " %s %s %s %s", packageNameTemp, versionTemp, &tempLevel, descriptionTemp);
-	printf("%s s% s% s%\n", packageNameTemp, versionTemp, tempLevel, descriptionTemp);
+	char tempString[300];
+	
+	// statements
+	packageNameTemp[0] = versionTemp[0] = levelTemp[0] = descriptionTemp[0] = '\0';
+	sscanf( line, "%99s %99s %299[^\n]", packageNameTemp, versionTemp, &tempString);
+	if (tempString[0] == '[')
+		sscanf( tempString, "%99s %299[^\n]", levelTemp, descriptionTemp);
+	else
+		strcpy(descriptionTemp, tempString);
+	if (strcmp(packageNameTemp, "") == 0)
+		success = 0;
+
 	return success;
-}
+} // parseLine
