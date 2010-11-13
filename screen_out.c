@@ -21,3 +21,29 @@ int printPackage ( PACKAGE *package )
 	}
 	return 0;
 } // printPackage
+
+/*	=================== printUnsorted ===================================
+	This function will print the contents of the BST unsorted to the screen
+		Pre:	listHeader - header structure with pointers to BST/Hash
+		Post:	Printed unsorted BST to screen	
+*/
+void printUnsorted ( HEADER *listHeader )
+{
+	// inorder traversal of BST, printing contents at each Node.
+	// call BST_Traversal, then at each node call printPackage
+
+	return;
+} // printUnsorted
+
+/*	=================== printSorted ===================================
+	This function will print the contents of the BST sorted by name to the screen
+		Pre:	listHeader - header structure with pointers to BST/Hash
+		Post:	Printed sorted BST to screen	
+*/
+void printSorted ( HEADER *listHeader )
+{
+	// Breadth-First traversal of BST, printing contents at each Node.
+	// call BST_Traversal_BFT, then at each node call printPackage
+
+	return;
+} // printSorted
