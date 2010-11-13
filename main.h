@@ -16,6 +16,7 @@ main.h - main header
 #define MEM_ERR printf( "Not enough memory\n" ), exit(201)
 #define BUCKETSIZE 3
 #define INPUTFILE "test-packages.txt"
+#define OUTPUTFILE "Output-packages.txt"
 
 // Data Structures
 typedef struct package {
@@ -73,3 +74,6 @@ int parseLine (char *line, char *packageNameTemp, char *versionTemp, char *level
 
 // Screen Output Functions
 int printPackage ( PACKAGE *package );
+int printFileOut (  );
+void printUnsorted ( HEADER *listHeader );
+void printSorted ( HEADER *listHeader );
