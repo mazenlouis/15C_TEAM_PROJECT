@@ -3,47 +3,49 @@
 // #includes
 #include "main.h"
 
-/*  ===================== printPackage ======================
-	This function prints a package to stdout
-		Pre:	package - ptr to PACKAGE struct
-		Post:	package printed to stdout
-		Return:	returns 1 if successful, 0 if not
+/*	=================== printPackage ===================================
+	This function will print the contents of the package to the screen
+		Pre:	root - package structure
+		Post:	Printed to the screen
 */
-int printPackage ( PACKAGE *package )
+void printPackage ( PACKAGE* ptrPackage )
 {
-	if(package)
-	{
-		printf("\nName       : %s", package->name);
-		printf("\nVersion    : %s", package->version);
-		printf("\nLevel      : %s", package->level);
-		printf("\nDescription: %s", package->description);
-		return 1;
-	}
-	return 0;
+	printf("%s %s %s %s\n", ptrPackage->name, ptrPackage->version, ptrPackage->level, ptrPackage->description);
+
+	return;
 } // printPackage
 
-/*	=================== printUnsorted ===================================
-	This function will print the contents of the BST unsorted to the screen
-		Pre:	listHeader - header structure with pointers to BST/Hash
-		Post:	Printed unsorted BST to screen	
+/*	======================= searchMgr ===================================
+	This is a driver function to search the Hash Table.
+		Pre: listHeader - header structure with the pointer to the Hash Table
+		Post printed package to screen if found
+			 print error message if not found
 */
-void printUnsorted ( HEADER *listHeader )
+void searchMgr ( HEADER *listHeader )
 {
-	// inorder traversal of BST, printing contents at each Node.
-	// call BST_Traversal, then at each node call printPackage
+	PACKAGE* found;
+	char searchName[100];
+
+	userPackage(searchName);
+	// found = Hash_Search(listHeader, searchName);
+	if(!found)
+		printf("Sorry the package %s was not found in the Table!\n", searchName);
+	else
+		printPackage(found);
 
 	return;
-} // printUnsorted
+} // searchMgr
 
-/*	=================== printSorted ===================================
-	This function will print the contents of the BST sorted by name to the screen
-		Pre:	listHeader - header structure with pointers to BST/Hash
-		Post:	Printed sorted BST to screen	
+/*	======================= userPackage ===================================
+	This function will prompt the user for a package to search for.
+		Pre: nothing
+		Post requested package to be searched for
 */
-void printSorted ( HEADER *listHeader )
+void userPackage (char* searchName )
 {
-	// Breadth-First traversal of BST, printing contents at each Node.
-	// call BST_Traversal_BFT, then at each node call printPackage
-
+	printf("What is the name of the package you would like to search for --> ");
+	scanf(" %99[^\n]", searchName);
+	FLUSH;
+	
 	return;
-} // printSorted
+} // userPackage

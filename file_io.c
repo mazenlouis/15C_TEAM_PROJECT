@@ -28,7 +28,10 @@ void loadData ( HEADER* listHeader )
 		if( parseLine( line, packageNameTemp, versionTemp, levelTemp, descriptionTemp ))
 		{
 			package = allocatePackage(packageNameTemp, versionTemp, levelTemp, descriptionTemp);
-			//insertPackage( package ); // insertPackage function goes here
+			BST_Insert (listHeader, package); // insert to Tree function goes here
+			// printPackage( package );
+			// insert to Hash function goes here
+			(listHeader->count)++;
 		}	
 	}
 	fclose(fpIn);
@@ -106,3 +109,28 @@ int parseLine (char *line, char *packageNameTemp, char *versionTemp, char *level
 
 	return success;
 } // parseLine
+
+/*  ==================== writeFile =============================
+	This function will print the Binary Tree to an output file.
+		Pre:	nothing
+		Post:	Printed List of Packages to Output-packages.txt
+		Return:	returns 1 if successful, 0 if not
+*/
+/*
+void writeFile ( HEADER* listHeader )
+{
+	// THIS FUNCTION IS TO BE CALLED DURING BST_TRAVERSAL
+	FILE* fpOut;
+
+	fpOut = fopen(OUTPUTFILE, "a");
+	if(!fpOut)
+		MEM_ERR;
+	else
+	{
+		fprintf(fpOut, "%s %s %s %s\n", );
+		return 1;
+	}
+	fclose(fpOut);
+	return 0;
+} // writeFile
+*/

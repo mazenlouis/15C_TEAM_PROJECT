@@ -31,7 +31,7 @@ typedef struct hash {
 	PACKAGE *bucket[BUCKETSIZE];
 } HASH;
 
-typedef struct bstnode {
+typedef struct node {
 	PACKAGE *ptrPackage;
 	struct node *left;
 	struct node *right;
@@ -63,17 +63,20 @@ void listHash ( HEADER* listHeader );
 void hashEff ( HEADER* listHeader );
 
 //BST Functions
-void insertTree ( PACKAGE* package );
-void listTree ( HEADER* listHeader );
-void printTree ( HEADER* listHeader );
+BSTNODE*	BSTNODE_Create ( );
+void		BST_Traverse (HEADER* listHeader);
+void		BST_Traverse_BFT (HEADER* listHeader) ;
+int			BST_Insert (HEADER* listHeader, PACKAGE* package);
+int			comparePackage   (PACKAGE* pack1, PACKAGE* pack2);
+void		listTree ( HEADER* listHeader );
+void		printTree ( HEADER* listHeader );
 
 // File I/O Functions
-void writeFile ( HEADER* listHeader );
+void	writeFile ( HEADER* listHeader );
 PACKAGE *allocatePackage( char *packageNameTemp, char *versionTemp, char* levelTemp, char *descriptionTemp);
-int parseLine (char *line, char *packageNameTemp, char *versionTemp, char *levelTemp, char *descriptionTemp);
+int		parseLine (char *line, char *packageNameTemp, char *versionTemp, char *levelTemp, char *descriptionTemp);
 
 // Screen Output Functions
-int printPackage ( PACKAGE *package );
-int printFileOut (  );
-void printUnsorted ( HEADER *listHeader );
-void printSorted ( HEADER *listHeader );
+void searchMgr ( HEADER *listHeader );
+void printPackage ( PACKAGE* ptrPackage );
+void userPackage (char* searchName );

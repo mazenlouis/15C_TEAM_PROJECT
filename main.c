@@ -75,11 +75,11 @@ void menuManager( HEADER* listHeader )
 				       break;
 		    case '2' : ;
 				       break;
-		    case '3' : ;
+		    case '3' : searchMgr (listHeader);
 				       break;
-			case '4' : ;
+			case '4' : BST_Traverse (listHeader);
 				       break;
-		    case '5' : ;
+		    case '5' : BST_Traverse_BFT (listHeader);
 				       break;
 			case '6' : ;
                        break;
