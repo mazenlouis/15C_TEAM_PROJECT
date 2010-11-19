@@ -57,16 +57,27 @@ void createHash ( HEADER* listHeader, int size )
 }
 
 /* ============================ insertHash =======================
-
-	   PRE  : 
-	   POST : 
-	   RETURNS : 
+	inserts a package into a hash table with bucket collision
+	   PRE  : listHeader - ptr to HEADER
+			package - ptr to package to be inserted
+	   POST : package is inserted or dropped
+	   RETURNS : return 1 is success, 0 if fail
 */
-void insertHash (HEADER* listHeader, PACKAGE* package)
+int insertHash (HEADER* listHeader, PACKAGE* package)
 {
 	//	Local Definitions
+	int index;
+	int success = 0;
 	//	Statements
-	return;
+	index =  hashKey ( listHeader, package->name );
+	if (listHeader->hashAry[index].buckets_used < listHeader->bucketSize)
+	{
+		listHeader->hashAry[index].bucket[listHeader->hashAry[index].buckets_used] = package;
+		(listHeader->hashAry[index].buckets_used)++;
+		success = 1;
+	}
+
+	return success;
 }
 
 /* ============================ deleteHash =======================
@@ -88,11 +99,24 @@ void deleteHash (HEADER* listHeader, char *packageName)
 	   POST : 
 	   RETURNS : 
 */
-void hashSearch (HEADER* listHeader, char *packageName)
+PACKAGE* hashSearch (HEADER* listHeader, char *packageName)
 {
 	//	Local Definitions
+	int index;
+	int i = 0;
+	
 	//	Statements
-	return;
+	index =  hashKey ( listHeader, packageName );
+
+	while(i < listHeader->hashAry[index].buckets_used)
+	{
+		if(strcmp( listHeader->hashAry[index].bucket[i]->name, packageName ) == 0 );
+			return listHeader->hashAry[index].bucket[i];
+		i++;
+	}
+	
+
+	return NULL;
 }
 
 /* ============================ listHash =======================

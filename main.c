@@ -184,8 +184,17 @@ void menu_DeletePackage ( HEADER* listHeader )
 */
 void menu_Search ( HEADER* listHeader )
 {
+	PACKAGE* found;
+	char searchName[100];
+
 	printf("Search...\n");
-	searchMgr (listHeader);
+
+	userPackage(searchName);
+	found = hashSearch(listHeader, searchName);
+	if(!found)
+		printf("Sorry the package %s was not found in the Table!\n", searchName);
+	else
+		printPackage(found);
 	return;
 }
 

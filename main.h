@@ -65,9 +65,9 @@ void menu_CalcEff ( HEADER* listHeader );
 // Hash Functions
 int hashKey ( HEADER *listHeader, char *packageName );
 void createHash ( HEADER* listHeader, int size );
-void insertHash ( HEADER* listHeader, PACKAGE* package );
+int insertHash ( HEADER* listHeader, PACKAGE* package );
 void deleteHash ( HEADER* listHeader, char *packageName );
-void hashSearch ( HEADER* listHeader, char *packageName );
+PACKAGE* hashSearch ( HEADER* listHeader, char *packageName );
 void listHash ( HEADER* listHeader );
 void hashEff ( HEADER* listHeader );
 void reHash ( HEADER* listHeader );
@@ -90,6 +90,5 @@ int			parseLine (char *line, char *packageNameTemp, char *versionTemp, char *lev
 void		writeFile ( PACKAGE* ptrPackage );
 
 // Screen Output Functions
-void searchMgr ( HEADER *listHeader );
 void printPackage ( PACKAGE* ptrPackage );
 void userPackage (char* searchName );
