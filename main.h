@@ -64,19 +64,21 @@ void hashEff ( HEADER* listHeader );
 
 //BST Functions
 BSTNODE*	BSTNODE_Create ( );
-void		BST_Traverse (HEADER* listHeader);
-void		BST_Traverse_BFT (HEADER* listHeader) ;
+void		BST_Traverse (HEADER* listHeader, void (*process) (PACKAGE* package) );
+void		BST_Traverse_BFT (HEADER* listHeader, void (*process) (PACKAGE* package)) ;
 int			BST_Insert (HEADER* listHeader, PACKAGE* package);
+void		BST_Print (HEADER* listHeader);
 int			comparePackage   (PACKAGE* pack1, PACKAGE* pack2);
 void		listTree ( HEADER* listHeader );
 void		printTree ( HEADER* listHeader );
 
 // File I/O Functions
-void	writeFile ( HEADER* listHeader );
-PACKAGE *allocatePackage( char *packageNameTemp, char *versionTemp, char* levelTemp, char *descriptionTemp);
-int		parseLine (char *line, char *packageNameTemp, char *versionTemp, char *levelTemp, char *descriptionTemp);
+void		writeFile ( PACKAGE* ptrPackage );
+PACKAGE*	allocatePackage( char *packageNameTemp, char *versionTemp, char* levelTemp, char *descriptionTemp);
+int			parseLine (char *line, char *packageNameTemp, char *versionTemp, char *levelTemp, char *descriptionTemp);
 
 // Screen Output Functions
 void searchMgr ( HEADER *listHeader );
 void printPackage ( PACKAGE* ptrPackage );
+void printTree ( PACKAGE* ptrPackage );
 void userPackage (char* searchName );

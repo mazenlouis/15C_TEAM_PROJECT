@@ -77,13 +77,13 @@ void menuManager( HEADER* listHeader )
 				       break;
 		    case '3' : searchMgr (listHeader);
 				       break;
-			case '4' : BST_Traverse (listHeader);
+			case '4' : ;
 				       break;
-		    case '5' : BST_Traverse_BFT (listHeader);
+		    case '5' : BST_Traverse (listHeader, printPackage);
 				       break;
-			case '6' : ;
+			case '6' : BST_Print (listHeader);
                        break;
-			case '7' : ;
+			case '7' : BST_Traverse (listHeader, writeFile);
 				       break;
 			case '8' : ;
 				       break;

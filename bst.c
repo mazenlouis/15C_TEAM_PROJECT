@@ -6,8 +6,9 @@
 
 // Private Use Functions
 static BSTNODE* _insert (HEADER* listHeader, BSTNODE* root, BSTNODE* newPackage);
-static void _traverse (BSTNODE* root);
-static void _traverseBFT (BSTNODE* root);
+static void _traverse (BSTNODE* root, void (*process) (PACKAGE* package) );
+static void _traverseBFT (BSTNODE* root, void (*process) (PACKAGE* package) );
+void _print (BSTNODE *root, int   level);
 
 /*	====================== comparePackage======================  
 	Compare two package name's and return low, equal, high.
@@ -87,7 +88,7 @@ static BSTNODE* _insert (HEADER* listHeader, BSTNODE* root, BSTNODE* newPackage)
 		return newPackage;
 
 	// Locate null subtree for insertion 
-	if (comparePackage(root->ptrPackage, newPackage->ptrPackage) < 0)
+	if (comparePackage(root->ptrPackage, newPackage->ptrPackage) > 0)
 	{
 		root->left = _insert(listHeader, root->left, newPackage);
 	    return root; 
@@ -109,10 +110,10 @@ static BSTNODE* _insert (HEADER* listHeader, BSTNODE* root, BSTNODE* newPackage)
 	         process visited package during traversal 
 	   Post  Pacakge processed in LNR (inorder) sequence 
 */
-void BST_Traverse (HEADER* listHeader) 
+void BST_Traverse (HEADER* listHeader, void (*process) (PACKAGE* package) ) 
 {
 	if(listHeader->treeRoot)
-		_traverse (listHeader->treeRoot);
+		_traverse (listHeader->treeRoot, process);
 	return;
 } // end BST_Traverse 
 
@@ -122,13 +123,15 @@ void BST_Traverse (HEADER* listHeader)
 	   Pre   Tree has been created (may be null) 
 	   Post  All nodes processed 
 */
-static void _traverse (BSTNODE* root) 
+static void _traverse (BSTNODE* root, void (*process) (PACKAGE* package)) 
 {
     if (root)
 	{
-        _traverse (root->left);
-		printPackage ( root->ptrPackage );
-        _traverse (root->right);
+		_traverse (root->left, process);
+		process ( root->ptrPackage );
+        _traverse (root->right, process);
+		
+        
     }
     return;
 }// _traverse
@@ -139,19 +142,19 @@ static void _traverse (BSTNODE* root)
 	         process visited packages during traversal 
 	   Post  Package processed in Breadth First sequence 
 */
-void BST_Traverse_BFT (HEADER* listHeader) 
+void BST_Traverse_BFT (HEADER* listHeader, void (*process) (PACKAGE* package)) 
 {
-	_traverseBFT (listHeader->treeRoot);
+	_traverseBFT (listHeader->treeRoot, process);
 	return;
 } // end BST_Traverse
 
 /*	=================== _traverseBFT =================== 
 	Breadth First tree traversal. To process a node, we use 
-	the function printPackage.
+	a pointer to a process function.
 	   Pre   Tree has been created (may be null) 
 	   Post  All nodes processed 
 */
-static void _traverseBFT (BSTNODE* root) 
+static void _traverseBFT (BSTNODE* root, void (*process) (PACKAGE* package) )
 {
     BSTNODE* currentNode;
 	BSTNODE* tempNode;
@@ -167,7 +170,7 @@ static void _traverseBFT (BSTNODE* root)
 
 	while(currentNode != NULL)
 	{
-		printPackage ( root->ptrPackage );
+		process ( currentNode->ptrPackage );
 
 		if(currentNode->left != NULL)
 			enqueue(queue, currentNode->left);
@@ -187,3 +190,39 @@ static void _traverseBFT (BSTNODE* root)
 
 	return;
 }// _traverseBFT
+
+/*  ============================= BST_Print ============================= 
+	This function prints the BST tree by calling a recursive inorder 
+	traversal.
+		Pre:	Tree must be initialized. Null tree is OK.
+				Level is node level: root == 0
+		Post:	Tree has been printed.
+*/
+void BST_Print (HEADER* listHeader) 
+{
+	_print (listHeader->treeRoot, 0);
+    return;
+}   // AVL_PRINT 
+
+/*  ============================= _print ============================= 
+	This function uses recursion to print the tree. At each level, the 
+    level number is printed along with the node contents.
+    Pre		root is the root of a tree or subtree
+            level is the level of the tree: tree root is 0
+    Post    Tree has been printed.
+*/
+void _print (BSTNODE *root, int   level) 
+{
+ 	int i;
+ 	
+  	if ( root )
+ 	{
+		_print ( root->right, level + 1 );
+		for (i = 0; i <= level; i++ )
+ 			printf (" " );
+		printf( "%d: %s\n", level, root->ptrPackage->name  );
+		_print ( root->left, level + 1 );
+ 	} 
+
+	return;
+ } 

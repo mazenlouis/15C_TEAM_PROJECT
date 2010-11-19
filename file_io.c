@@ -29,7 +29,6 @@ void loadData ( HEADER* listHeader )
 		{
 			package = allocatePackage(packageNameTemp, versionTemp, levelTemp, descriptionTemp);
 			BST_Insert (listHeader, package); // insert to Tree function goes here
-			// printPackage( package );
 			// insert to Hash function goes here
 			(listHeader->count)++;
 		}	
@@ -116,21 +115,18 @@ int parseLine (char *line, char *packageNameTemp, char *versionTemp, char *level
 		Post:	Printed List of Packages to Output-packages.txt
 		Return:	returns 1 if successful, 0 if not
 */
-/*
-void writeFile ( HEADER* listHeader )
+
+void	writeFile ( PACKAGE* ptrPackage )
 {
-	// THIS FUNCTION IS TO BE CALLED DURING BST_TRAVERSAL
 	FILE* fpOut;
 
-	fpOut = fopen(OUTPUTFILE, "a");
+	fpOut = fopen( OUTPUTFILE, "a");
 	if(!fpOut)
-		MEM_ERR;
-	else
-	{
-		fprintf(fpOut, "%s %s %s %s\n", );
-		return 1;
-	}
+		printf("Sorry could not open the file \"%s\"...", OUTPUTFILE);
+
+	fprintf(fpOut, "%s %s %s %s\n", ptrPackage->name, ptrPackage->version, ptrPackage->level, ptrPackage->description);
+
 	fclose(fpOut);
-	return 0;
+
+	return;
 } // writeFile
-*/
