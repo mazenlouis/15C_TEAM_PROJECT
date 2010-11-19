@@ -71,21 +71,21 @@ void menuManager( HEADER* listHeader )
 	    option = toupper (option);
 		switch(option)
 		{
-		    case '1' : ;
+		    case '1' : menu_AddPackage (listHeader);
 				       break;
-		    case '2' : ;
+		    case '2' : menu_DeletePackage (listHeader);
 				       break;
-		    case '3' : searchMgr (listHeader);
+		    case '3' : menu_Search (listHeader);
 				       break;
-			case '4' : ;
+			case '4' : menu_ListUnsorted (listHeader);
 				       break;
-		    case '5' : BST_Traverse (listHeader, printPackage);
+		    case '5' : menu_ListSorted (listHeader);
 				       break;
-			case '6' : BST_Print (listHeader);
+			case '6' : menu_PrintTree (listHeader);
                        break;
-			case '7' : BST_Traverse (listHeader, writeFile);
+			case '7' : menu_WriteToFile (listHeader);
 				       break;
-			case '8' : ;
+			case '8' : menu_CalcEff (listHeader);
 				       break;
 			case '9' : printf("Closing program\n");
 				       break;
@@ -148,3 +148,104 @@ HEADER* initHashBST ( void )
 
 	return listHeader;
 }  // initHashBST
+
+/* ============================ menu_AddPackage =======================
+	
+	   PRE  : 
+	   POST : 
+	   RETURNS : 
+*/
+void menu_AddPackage ( HEADER* listHeader )
+{
+	printf("Add new package...\n");
+	return;
+}
+
+/* ============================ menu_DeletePackage =======================
+	
+	   PRE  : 
+	   POST : 
+	   RETURNS : 
+*/
+void menu_DeletePackage ( HEADER* listHeader )
+{
+	printf("Delete package...\n");
+	return;
+}
+
+/* ============================ menu_Search =======================
+	
+	   PRE  : 
+	   POST : 
+	   RETURNS : 
+*/
+void menu_Search ( HEADER* listHeader )
+{
+	printf("Search...\n");
+	searchMgr (listHeader);
+	return;
+}
+
+/* ============================ menu_ListUnsorted =======================
+	
+	   PRE  : 
+	   POST : 
+	   RETURNS : 
+*/
+void menu_ListUnsorted ( HEADER* listHeader )
+{
+	printf("List unsorted...\n");
+	return;
+}
+
+/* ============================ menu_ListSorted =======================
+	
+	   PRE  : 
+	   POST : 
+	   RETURNS : 
+*/
+void menu_ListSorted ( HEADER* listHeader )
+{
+	printf("List sorted...\n");
+	BST_Traverse (listHeader, printPackage);
+	return;
+}
+
+/* ============================ menu_PrintTree =======================
+	
+	   PRE  : 
+	   POST : 
+	   RETURNS : 
+*/
+void menu_PrintTree ( HEADER* listHeader )
+{
+	printf("Print tree...\n");
+	BST_Print (listHeader);
+	return;
+}
+
+/* ============================ menu_WriteToFile =======================
+	
+	   PRE  : 
+	   POST : 
+	   RETURNS : 
+*/
+void menu_WriteToFile ( HEADER* listHeader )
+{
+	printf("Write to file...\n");
+	BST_Traverse (listHeader, writeFile);
+	return;
+}
+
+/* ============================ menu_CalcEff =======================
+	
+	   PRE  : 
+	   POST : 
+	   RETURNS : 
+*/
+void menu_CalcEff ( HEADER* listHeader )
+{
+	printf("Calculate efficiency \n");
+	return;
+}
+
