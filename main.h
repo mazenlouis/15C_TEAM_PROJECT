@@ -50,17 +50,27 @@ typedef struct header {
 void printMenu( void );
 void menuManager( HEADER* listHeader );
 char getChar ( void );
-void loadData ( HEADER* listHeader );
-void addPackage ( HEADER* listHeader );
-void deletePackage ( HEADER* listHeader );
 HEADER* initHashBST ( void );
 int insertPackage ( PACKAGE* );
 
+void menu_AddPackage ( HEADER* listHeader );
+void menu_DeletePackage ( HEADER* listHeader );
+void menu_Search ( HEADER* listHeader );
+void menu_ListUnsorted ( HEADER* listHeader );
+void menu_ListSorted ( HEADER* listHeader );
+void menu_PrintTree ( HEADER* listHeader );
+void menu_WriteToFile ( HEADER* listHeader );
+void menu_CalcEff ( HEADER* listHeader );
+
 // Hash Functions
-void insertHash ( PACKAGE* package );
-void hashSearch ( PACKAGE* package );
+int hashKey ( HEADER *listHeader, char *packageName );
+void createHash ( HEADER* listHeader, int size );
+void insertHash ( HEADER* listHeader, PACKAGE* package );
+void deleteHash ( HEADER* listHeader, char *packageName );
+void hashSearch ( HEADER* listHeader, char *packageName );
 void listHash ( HEADER* listHeader );
 void hashEff ( HEADER* listHeader );
+void reHash ( HEADER* listHeader );
 
 //BST Functions
 BSTNODE*	BSTNODE_Create ( );
@@ -71,14 +81,15 @@ void		BST_Print (HEADER* listHeader);
 int			comparePackage   (PACKAGE* pack1, PACKAGE* pack2);
 void		listTree ( HEADER* listHeader );
 void		printTree ( HEADER* listHeader );
+int			BST_Count (HEADER* listHeader);
 
 // File I/O Functions
-void		writeFile ( PACKAGE* ptrPackage );
+void loadData ( HEADER* listHeader );
 PACKAGE*	allocatePackage( char *packageNameTemp, char *versionTemp, char* levelTemp, char *descriptionTemp);
 int			parseLine (char *line, char *packageNameTemp, char *versionTemp, char *levelTemp, char *descriptionTemp);
+void		writeFile ( PACKAGE* ptrPackage );
 
 // Screen Output Functions
 void searchMgr ( HEADER *listHeader );
 void printPackage ( PACKAGE* ptrPackage );
-void printTree ( PACKAGE* ptrPackage );
 void userPackage (char* searchName );

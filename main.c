@@ -15,8 +15,11 @@ int main( void )
 	// Statements
 	printf("\n\n\t\t\t15C TEAM PROJECT\n\n");
 	
+	printf("Initializing...");
 	listHead = initHashBST();
+	printf("Loading Data...");
 	loadData(listHead);
+	printf("done\n");
 	menuManager( listHead );
 
     printf("\n");
@@ -150,7 +153,7 @@ HEADER* initHashBST ( void )
 }  // initHashBST
 
 /* ============================ menu_AddPackage =======================
-	
+	Calls libary functions to add a package
 	   PRE  : 
 	   POST : 
 	   RETURNS : 
@@ -162,7 +165,7 @@ void menu_AddPackage ( HEADER* listHeader )
 }
 
 /* ============================ menu_DeletePackage =======================
-	
+	Calls libary functionsto delete a package
 	   PRE  : 
 	   POST : 
 	   RETURNS : 
@@ -174,7 +177,7 @@ void menu_DeletePackage ( HEADER* listHeader )
 }
 
 /* ============================ menu_Search =======================
-	
+	Calls libary functions to search a hash table for a package
 	   PRE  : 
 	   POST : 
 	   RETURNS : 
@@ -187,7 +190,7 @@ void menu_Search ( HEADER* listHeader )
 }
 
 /* ============================ menu_ListUnsorted =======================
-	
+	Calls libary functions to print the hash table which is unsorted
 	   PRE  : 
 	   POST : 
 	   RETURNS : 
@@ -199,7 +202,7 @@ void menu_ListUnsorted ( HEADER* listHeader )
 }
 
 /* ============================ menu_ListSorted =======================
-	
+	Calls libary functions to print the binary search tree which is sorted
 	   PRE  : 
 	   POST : 
 	   RETURNS : 
@@ -212,7 +215,7 @@ void menu_ListSorted ( HEADER* listHeader )
 }
 
 /* ============================ menu_PrintTree =======================
-	
+	Calls libary functions to print the BST in an indented format
 	   PRE  : 
 	   POST : 
 	   RETURNS : 
@@ -225,7 +228,7 @@ void menu_PrintTree ( HEADER* listHeader )
 }
 
 /* ============================ menu_WriteToFile =======================
-	
+	Calls libary functions to write the packages to a file
 	   PRE  : 
 	   POST : 
 	   RETURNS : 
@@ -238,7 +241,7 @@ void menu_WriteToFile ( HEADER* listHeader )
 }
 
 /* ============================ menu_CalcEff =======================
-	
+	Calls libary functions to calculate and print hash table efficiency
 	   PRE  : 
 	   POST : 
 	   RETURNS : 

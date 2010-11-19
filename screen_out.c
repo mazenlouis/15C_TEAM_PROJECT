@@ -26,12 +26,12 @@ void searchMgr ( HEADER *listHeader )
 	PACKAGE* found;
 	char searchName[100];
 
-	userPackage(searchName);
-	// found = Hash_Search(listHeader, searchName);
-	if(!found)
-		printf("Sorry the package %s was not found in the Table!\n", searchName);
-	else
-		printPackage(found);
+	//userPackage(searchName);
+	//// found = Hash_Search(listHeader, searchName);
+	//if(!found)
+	//	printf("Sorry the package %s was not found in the Table!\n", searchName);
+	//else
+	//	printPackage(found);
 
 	return;
 } // searchMgr

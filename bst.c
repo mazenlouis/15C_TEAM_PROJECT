@@ -226,3 +226,13 @@ void _print (BSTNODE *root, int   level)
 
 	return;
  } 
+
+/*	=================== BST_Count ==================
+	Returns number of nodes in tree.
+	   Pre     tree has been created 
+	   Returns tree count 
+*/
+int BST_Count (HEADER* listHeader)
+{
+	return (listHeader->count);
+}// BST_Count 

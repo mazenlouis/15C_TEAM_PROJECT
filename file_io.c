@@ -18,18 +18,26 @@ void loadData ( HEADER* listHeader )
 	char versionTemp[100] = { '\0' };
 	char levelTemp[100] = { '\0' };
 	char descriptionTemp[300] = { '\0' };
+	int size = 0;
+	int tempC;
 
 	fpIn = fopen(INPUTFILE, "r");
 	if(!fpIn)
 		MEM_ERR;
+	
+	while((tempC = fgetc(fpIn)) != EOF)
+		if(tempC == '\n')
+			size++;
 
+	rewind(fpIn);
+	createHash ( listHeader, size);
 	while(fgets( line, sizeof(line), fpIn )) // loop that will read file line-by-line saving data into the above temp variables
 	{
 		if( parseLine( line, packageNameTemp, versionTemp, levelTemp, descriptionTemp ))
 		{
 			package = allocatePackage(packageNameTemp, versionTemp, levelTemp, descriptionTemp);
 			BST_Insert (listHeader, package); // insert to Tree function goes here
-			// insert to Hash function goes here
+			insertHash (listHeader, package);
 			(listHeader->count)++;
 		}	
 	}
