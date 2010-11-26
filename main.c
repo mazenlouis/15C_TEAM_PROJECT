@@ -261,3 +261,37 @@ void menu_CalcEff ( HEADER* listHeader )
 	return;
 }
 
+/*	==================== binarySearch ====================
+	Search an ordered list using Binary Search 
+	   Pre   list must contain at least one element
+	         size is the actual number of elements in the list
+	         target is the value of element being sought
+	   Post  FOUND: locn assigned index to target element 
+	                return 1 (found)
+	         NOT FOUND: locn = element below or above target 
+	                    return 0 (not found)
+*/
+int binarySearch (int  list[],
+                  int  size,
+                  int  target, 
+                  int *locn)
+{
+	int first;
+	int mid;
+	int last;
+
+	first = 0;
+	last = size - 1;
+	while (first <= last)
+	   {
+	    mid = (first + last) / 2;
+	    if (target > list[mid])       // look in upper half 
+	       first = mid + 1;
+	    else if (target < list[mid])  // look in lower half 
+	       last = mid - 1;
+	    else                          // found equal: force exit 
+	       first = last + 1;
+	   }
+	*locn = mid;
+	return target == list [mid];
+}
