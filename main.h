@@ -17,6 +17,7 @@ main.h - main header
 #define BUCKETSIZE 3
 #define INPUTFILE "test-packages.txt"
 #define OUTPUTFILE "Output-packages.txt"
+#define HASH_MAX 75
 
 // Data Structures
 typedef struct package {
@@ -41,6 +42,7 @@ typedef struct header {
 	int count;
 	int hashArySize;
 	int bucketSize;
+	int primaryBuckets;
 	HASH *hashAry;
 	BSTNODE *treeRoot;
 } HEADER;
@@ -52,6 +54,7 @@ void menuManager( HEADER* listHeader );
 char getChar ( void );
 HEADER* initHashBST ( void );
 int insertPackage ( PACKAGE* );
+int binarySearch (int  list[], int last, int target, int *locn);
 
 void menu_AddPackage ( HEADER* listHeader );
 void menu_DeletePackage ( HEADER* listHeader );
@@ -66,11 +69,12 @@ void menu_CalcEff ( HEADER* listHeader );
 int hashKey ( HEADER *listHeader, char *packageName );
 void createHash ( HEADER* listHeader, int size );
 int insertHash ( HEADER* listHeader, PACKAGE* package );
-void deleteHash ( HEADER* listHeader, char *packageName );
+int deleteHash ( HEADER* listHeader, char *packageName );
 PACKAGE* hashSearch ( HEADER* listHeader, char *packageName );
 void listHash ( HEADER* listHeader );
 void hashEff ( HEADER* listHeader );
 void reHash ( HEADER* listHeader );
+float loadFactor ( HEADER* listHeader );
 
 //BST Functions
 BSTNODE*	BSTNODE_Create ( );
