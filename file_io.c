@@ -120,7 +120,7 @@ int parseLine (char *line, char *packageNameTemp, char *versionTemp, char *level
 /*  ==================== writeFile =============================
 	This function is a process function that is called for each
 	package and will append one line to the file
-		Pre:	nothing
+		Pre:	package - ptr to package
 		Post:	Printed List of Packages to Output-packages.txt
 		Return:	
 */
@@ -141,7 +141,7 @@ void	writeFile ( PACKAGE* ptrPackage )
 
 /*  ==================== startWriteFile =============================
 	This function will print the Binary Tree to an output file.
-		Pre:	nothing
+		Pre:	listHeader - ptr to HEADER
 		Post:	Printed List of Packages to Output-packages.txt
 		Return:
 */
@@ -153,7 +153,8 @@ void	startWriteFile ( HEADER* listHeader )
 	if(!fpOut)
 		printf("Sorry could not open the file \"%s\"...", OUTPUTFILE);
 	fclose(fpOut);
-	printf("Write to file...\n");
+	printf("Writing pakages to file...");
 	BST_Traverse_BFT (listHeader, writeFile);
+	printf("done\n");
 	return;
 } // startWriteFile

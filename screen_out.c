@@ -29,3 +29,28 @@ void userPackage (char* searchName )
 	
 	return;
 } // userPackage
+
+
+/*	================= printEff ===================
+	Calculates and prints efficiency of hash table
+	   Pre    hash
+	   Post   hash table efficiency printed
+	   Return void
+*/
+void printEff ( HEADER* listHeader )
+{
+	// Local Definitions
+	float loadFactor = 0.0;
+	int longestBuckets = 0.0;
+	int numberOfCollisions = 0;
+
+	// Statements
+	calcHashEff ( listHeader, &loadFactor, &longestBuckets, &numberOfCollisions );
+	printf("Hash Efficiency\n");
+	printf("=======================================\n");
+	printf("Load Factor            :  %.2f\n", loadFactor);
+	printf("Longest Bucket         :  %d\n", longestBuckets);
+	printf("Number of Collisions   :  %d\n", numberOfCollisions);
+
+	return;
+} // printEff

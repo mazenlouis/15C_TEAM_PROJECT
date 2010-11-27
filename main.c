@@ -22,6 +22,9 @@ int main( void )
 	printf("done\n");
 	
 	menuManager( listHead );
+
+	startWriteFile ( listHead );
+
 	listHead = destory( listHead );
 
     printf("\n");
@@ -259,8 +262,7 @@ void menu_WriteToFile ( HEADER* listHeader )
 */
 void menu_CalcEff ( HEADER* listHeader )
 {
-	printf("Calculate efficiency \n");
-	printf("Load Efficiency: %%%f\n", loadFactor ( listHeader ));
+	printEff ( listHeader );
 	return;
 }
 

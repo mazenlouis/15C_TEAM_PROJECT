@@ -302,3 +302,33 @@ int binarySearch (int  list[],
 	*locn = mid;
 	return target == list [mid];
 }
+
+/*	====================== calcHashEff ======================  
+	Calculates the efficieny of a hash table
+		Pre:	hash - ptr to hash table
+		Post:	primePct - float ptr to Percentage of prime area filled
+				avgLLnodes - float ptr to Avg nodes in linked lists
+				longestLL - int ptr to longest link list
+		Returns: void
+*/
+void calcHashEff( HEADER* listHeader, float *loadFactor, int *longestBuckets, int *numberOfCollisions )
+{
+	//	Local Definition
+	int index;
+
+	//	Statements
+	*loadFactor =  0.0;
+	*longestBuckets = *numberOfCollisions = 0;
+
+	for(index = 0; index < listHeader->hashArySize; index++)
+	{
+		if(listHeader->hashAry[index].buckets_used > *longestBuckets)
+			*longestBuckets = listHeader->hashAry[index].buckets_used;
+		if(listHeader->hashAry[index].buckets_used > 1)
+			(*numberOfCollisions)++;
+	}
+	
+	*loadFactor = (float)listHeader->count / (float)listHeader->hashArySize;
+
+	return;
+} // calcHashEff

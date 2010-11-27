@@ -40,12 +40,12 @@ typedef struct node {
 } BSTNODE;
 
 typedef struct header {
-	int count;
-	int hashArySize;
-	int bucketSize;
+	int count;  // number of packages
+	int hashArySize;  // hash array size - should be a prime number
+	int bucketSize; // max number of buckets per hash
 	int primaryBuckets;
-	HASH *hashAry;
-	BSTNODE *treeRoot;
+	HASH *hashAry; // ptr to hash table
+	BSTNODE *treeRoot;  // ptr to BST
 } HEADER;
 
 // Function Prototypes
@@ -77,6 +77,7 @@ void reHash ( HEADER* listHeader );
 float loadFactor ( HEADER* listHeader );
 HASH* destroyHash ( HEADER* listHeader );
 int binarySearch (int  list[], int last, int target, int *locn);
+void calcHashEff( HEADER* listHeader, float *loadFactor, int *longestBuckets, int *numberOfCollisions );
 
 //BST Functions
 BSTNODE*	BSTNODE_Create ( );
@@ -100,3 +101,4 @@ void		startWriteFile ( HEADER* listHeader );
 // Screen Output Functions
 void printPackage ( PACKAGE* ptrPackage );
 void userPackage (char* searchName );
+void printEff ( HEADER* listHeader );
