@@ -6,6 +6,7 @@
 // Private Use Functions
 static BSTNODE* _insert (HEADER* listHeader, BSTNODE* root, BSTNODE* newPackage);
 static void _traverse (BSTNODE* root, void (*process) (PACKAGE* package) );
+static void _destroyBST ( BSTNODE* root );
 void _print (BSTNODE *root, int   level);
 
 /*	====================== comparePackage======================  
@@ -127,9 +128,7 @@ static void _traverse (BSTNODE* root, void (*process) (PACKAGE* package))
 	{
 		_traverse (root->left, process);
 		process ( root->ptrPackage );
-        _traverse (root->right, process);
-		
-        
+        _traverse (root->right, process); 
     }
     return;
 }// _traverse
@@ -179,3 +178,38 @@ int BST_Count (HEADER* listHeader)
 {
 	return (listHeader->count);
 }// BST_Count 
+
+/* ============================ destroyBST =======================
+	Calls recursive traversal to free packages and nodes
+	   PRE  : listHeader - ptr to HEADER
+	   POST : frees bst
+	   RETURNS : NULL
+*/
+BSTNODE* destroyBST ( HEADER* listHeader )
+{
+	if(listHeader->treeRoot)
+		_destroyBST (listHeader->treeRoot);
+	return NULL;
+}
+
+/* ============================ _destroyBST =======================
+	Recursive traversal to free packages and nodes
+	   PRE  : listHeader - ptr to HEADER
+	   POST : frees package, package data, and bst nodes
+	   RETURNS :
+*/
+static void _destroyBST ( BSTNODE* root ) 
+{
+	if ( root )
+ 	{
+		_destroyBST (root->left);
+		free ( root->ptrPackage->name );
+		free ( root->ptrPackage->description );
+		free ( root->ptrPackage->level );
+		free ( root->ptrPackage->version );
+		free ( root->ptrPackage );
+        _destroyBST (root->right);
+		free ( root );
+ 	} 
+
+}

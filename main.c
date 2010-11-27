@@ -21,7 +21,7 @@ int main( void )
 	loadData(listHead);
 	printf("done\n");
 	menuManager( listHead );
-
+	listHead = destory( listHead );
     printf("\n");
 	printf( _CrtDumpMemoryLeaks() ? "Memory Leak\n" : "No Leak\n");
 
@@ -263,3 +263,16 @@ void menu_CalcEff ( HEADER* listHeader )
 	return;
 }
 
+/* ============================ destory =======================
+	Calls libary functions to free BST and hash array
+	   PRE  : listHeader - ptr to HEADER
+	   POST : frees all dynamic memory
+	   RETURNS : NULL
+*/
+HEADER* destory ( HEADER* listHeader )
+{
+	listHeader->treeRoot = destroyBST ( listHeader ); // destroy BST
+	listHeader->hashAry = destroyHash ( listHeader ); // destroy Hash
+	free ( listHeader ); // destroy HEADER
+	return NULL;
+}

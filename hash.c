@@ -256,6 +256,17 @@ void reHash ( HEADER* listHeader )
 	free (tempAry);
 	return;
 }
+/* ============================ destroyHash =======================
+	
+	   PRE  : listHeader - ptr to HEADER
+	   POST : frees hash array
+	   RETURNS : NULL
+*/
+HASH* destroyHash ( HEADER* listHeader )
+{
+	free ( listHeader->hashAry );
+	return NULL;
+}
 
 /*	==================== binarySearch ====================
 	Search an ordered list using Binary Search 

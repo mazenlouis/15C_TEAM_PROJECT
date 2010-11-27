@@ -54,7 +54,7 @@ void menuManager( HEADER* listHeader );
 char getChar ( void );
 HEADER* initHashBST ( void );
 int insertPackage ( PACKAGE* );
-int binarySearch (int  list[], int last, int target, int *locn);
+HEADER* destory ( HEADER* listHeader );
 
 void menu_AddPackage ( HEADER* listHeader );
 void menu_DeletePackage ( HEADER* listHeader );
@@ -74,6 +74,8 @@ PACKAGE* hashSearch ( HEADER* listHeader, char *packageName );
 void listHash ( HEADER* listHeader );
 void reHash ( HEADER* listHeader );
 float loadFactor ( HEADER* listHeader );
+HASH* destroyHash ( HEADER* listHeader );
+int binarySearch (int  list[], int last, int target, int *locn);
 
 //BST Functions
 BSTNODE*	BSTNODE_Create ( );
@@ -84,6 +86,7 @@ int			comparePackage   (PACKAGE* pack1, PACKAGE* pack2);
 void		listTree ( HEADER* listHeader );
 void		printTree ( HEADER* listHeader );
 int			BST_Count (HEADER* listHeader);
+BSTNODE* destroyBST ( HEADER* listHeader );
 
 // File I/O Functions
 void loadData ( HEADER* listHeader );
