@@ -209,20 +209,6 @@ void listHash ( HEADER* listHeader )
 	return;
 }
 
-/* ============================ hashEff =======================
-	
-	   PRE  : listHeader - ptr to HEADER
-	   POST : prints hash efficiency
-	   RETURNS : 
-*/
-void hashEff ( HEADER* listHeader )
-{
-	//	Local Definitions
-	//	Statements
-	printf("Load factor: %.2f", loadFactor(listHeader));
-	return;
-}
-
 /* ============================ loadFactor =======================
 	
 	   PRE  : listHeader - ptr to HEADER

@@ -72,14 +72,12 @@ int insertHash ( HEADER* listHeader, PACKAGE* package );
 int deleteHash ( HEADER* listHeader, char *packageName );
 PACKAGE* hashSearch ( HEADER* listHeader, char *packageName );
 void listHash ( HEADER* listHeader );
-void hashEff ( HEADER* listHeader );
 void reHash ( HEADER* listHeader );
 float loadFactor ( HEADER* listHeader );
 
 //BST Functions
 BSTNODE*	BSTNODE_Create ( );
 void		BST_Traverse (HEADER* listHeader, void (*process) (PACKAGE* package) );
-void		BST_Traverse_BFT (HEADER* listHeader, void (*process) (PACKAGE* package)) ;
 int			BST_Insert (HEADER* listHeader, PACKAGE* package);
 void		BST_Print (HEADER* listHeader);
 int			comparePackage   (PACKAGE* pack1, PACKAGE* pack2);
