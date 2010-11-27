@@ -6,6 +6,7 @@
 // Private Use Functions
 static BSTNODE* _insert (HEADER* listHeader, BSTNODE* root, BSTNODE* newPackage);
 static void _traverse (BSTNODE* root, void (*process) (PACKAGE* package) );
+static void _traverseBFT (BSTNODE* root, void (*process) (PACKAGE* package) );
 static void _destroyBST ( BSTNODE* root );
 void _print (BSTNODE *root, int   level);
 
@@ -213,3 +214,58 @@ static void _destroyBST ( BSTNODE* root )
  	} 
 
 }
+
+
+/*  =================== BST_Traverse_BFT =================== 
+	Process tree using Breadth First traversal. 
+	Pre   Tree has been created (may be null) 
+	process visited packages during traversal 
+	Post  Package processed in Breadth First sequence 
+*/
+ 	
+void BST_Traverse_BFT (HEADER* listHeader, void (*process) (PACKAGE* package)) 
+{
+	_traverseBFT (listHeader->treeRoot, process);
+	return;
+} // end BST_Traverse
+	
+/*  =================== _traverseBFT =================== 
+	Breadth First tree traversal. To process a node, we use 
+	a pointer to a process function.
+	Pre   Tree has been created (may be null) 
+	Post  All nodes processed 
+ 	
+*/
+
+static void _traverseBFT (BSTNODE* root, void (*process) (PACKAGE* package) )
+{
+	BSTNODE* currentNode;
+	BSTNODE* tempNode;
+	QUEUE* queue;
+
+	queue = createQueue();
+	if(!queue)
+	{
+		printf("\nMemory Overflow!\n");
+		exit(201);
+	}
+	currentNode = root;
+
+	while(currentNode != NULL)
+	{
+		process ( currentNode->ptrPackage );
+		if(currentNode->left != NULL)
+			enqueue(queue, currentNode->left);
+		if(currentNode->right != NULL)
+			enqueue(queue, currentNode->right);
+		if(!emptyQueue(queue))
+		{
+			dequeue(queue, (void**)&tempNode);
+			currentNode = tempNode;
+		}
+		else currentNode = NULL;
+	}
+	queue = destroyQueue(queue);
+	return;
+
+}// _traverseBFT

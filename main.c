@@ -20,8 +20,10 @@ int main( void )
 	printf("Loading Data...");
 	loadData(listHead);
 	printf("done\n");
+	
 	menuManager( listHead );
 	listHead = destory( listHead );
+
     printf("\n");
 	printf( _CrtDumpMemoryLeaks() ? "Memory Leak\n" : "No Leak\n");
 
@@ -245,8 +247,7 @@ void menu_PrintTree ( HEADER* listHeader )
 */
 void menu_WriteToFile ( HEADER* listHeader )
 {
-	printf("Write to file...\n");
-	BST_Traverse (listHeader, writeFile);
+	startWriteFile ( listHeader );
 	return;
 }
 

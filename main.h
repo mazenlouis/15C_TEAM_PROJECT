@@ -10,6 +10,7 @@ main.h - main header
 #include <string.h>
 #include <ctype.h>
 #include <crtdbg.h>
+#include "queueADT.h"
 
 // #defines
 #define FLUSH while (getchar () != '\n')
@@ -80,6 +81,7 @@ int binarySearch (int  list[], int last, int target, int *locn);
 //BST Functions
 BSTNODE*	BSTNODE_Create ( );
 void		BST_Traverse (HEADER* listHeader, void (*process) (PACKAGE* package) );
+void		BST_Traverse_BFT (HEADER* listHeader, void (*process) (PACKAGE* package));
 int			BST_Insert (HEADER* listHeader, PACKAGE* package);
 void		BST_Print (HEADER* listHeader);
 int			comparePackage   (PACKAGE* pack1, PACKAGE* pack2);
@@ -93,6 +95,7 @@ void loadData ( HEADER* listHeader );
 PACKAGE*	allocatePackage( char *packageNameTemp, char *versionTemp, char* levelTemp, char *descriptionTemp);
 int			parseLine (char *line, char *packageNameTemp, char *versionTemp, char *levelTemp, char *descriptionTemp);
 void		writeFile ( PACKAGE* ptrPackage );
+void		startWriteFile ( HEADER* listHeader );
 
 // Screen Output Functions
 void printPackage ( PACKAGE* ptrPackage );
