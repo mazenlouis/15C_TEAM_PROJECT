@@ -9,6 +9,7 @@ static void _traverse (BSTNODE* root, void (*process) (PACKAGE* package) );
 static void _traverseBFT (BSTNODE* root, void (*process) (PACKAGE* package) );
 static void _destroyBST ( BSTNODE* root );
 void _print (BSTNODE *root, int   level);
+static BSTNODE* _delete (HEADER* listHeader, BSTNODE* root,  char* dataPtr, int* success);
 
 /*	====================== comparePackage======================  
 	Compare two package name's and return low, equal, high.
@@ -269,3 +270,85 @@ static void _traverseBFT (BSTNODE* root, void (*process) (PACKAGE* package) )
 	return;
 
 }// _traverseBFT
+
+/* ================== BST_Delete ================== 
+	This function deletes a node from the tree and 
+	rebalances it if necessary. 
+	   Pre    tree initialized--null tree is OK
+	          dltKey is pointer to data structure 
+	                 containing key to be deleted 
+	   Post   node deleted and its space recycled 
+	          -or- An error code is returned 
+	   Return Success (true) or Not found (false)
+*/
+int BST_Delete (HEADER* listHeader, char* dltKey)
+{
+	int  success;
+	BSTNODE* newRoot;
+	
+	newRoot = _delete (listHeader, listHeader->treeRoot, dltKey, &success);
+	if (success){
+		listHeader->treeRoot = newRoot;
+	    (listHeader->count)--;
+	    if (listHeader->count == 0) // Tree now empty 
+			listHeader->treeRoot = NULL;
+	} 
+	return success;
+}// BST_Delete
+
+/*	==================== _delete ==================== 
+	Deletes node from the tree (key must be unique!)
+	   Pre    tree initialized--null tree is OK.
+	          dataPtr contains key of node to be deleted
+	   Post   node is deleted and its space recycled
+	          -or- if key not found, tree is unchanged 
+	   Return success is true if deleted; false if not found
+	          pointer to root
+*/
+static BSTNODE* _delete (HEADER* listHeader, BSTNODE* root,  char* dataPtr, int* success)
+{
+	BSTNODE* dltPtr;
+	BSTNODE* exchPtr;
+	BSTNODE* newRoot;
+	PACKAGE* holdPtr;
+
+	if (!root){
+	    *success = 0;
+	    return NULL;
+	}
+	
+	if (strcmp(dataPtr, root->ptrPackage->name) < 0)
+	    root->left  = _delete (listHeader, root->left, dataPtr, success);
+	else if (strcmp(dataPtr, root->ptrPackage->name) > 0)
+	    root->right = _delete (listHeader, root->right, dataPtr, success);
+	else{ // Delete node found--test for leaf node 
+	    dltPtr = root;
+		if (!root->left){         // No left subtree 
+            //free (root->dataPtr);       // data memory
+	        newRoot = root->right;
+	        free (dltPtr);              // BST Node
+	        *success = 1;
+	        return newRoot;             // base case 
+	     }
+	     else
+			 if (!root->right){   // Only left subtree 
+	             newRoot = root->left;
+	             free (dltPtr);
+	             *success = 1;
+	             return newRoot;         // base case 
+	         }
+			 else{ // Delete Node has two subtrees 
+                 exchPtr = root->left;
+	             // Find largest node on left subtree
+	             while (exchPtr->right)
+	                 exchPtr = exchPtr->right;
+
+	              // Exchange Data 
+	              holdPtr          = root->ptrPackage;
+	              root->ptrPackage    = exchPtr->ptrPackage;
+	              exchPtr->ptrPackage = holdPtr;
+				  root->left = _delete (listHeader, root->left, exchPtr->ptrPackage->name, success);
+			 }// else 
+	}// node found 
+	return root; 
+}// _delete 

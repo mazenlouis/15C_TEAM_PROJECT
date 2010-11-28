@@ -165,7 +165,35 @@ HEADER* initHashBST ( void )
 */
 void menu_AddPackage ( HEADER* listHeader )
 {
+	char name[100];
+	char version[100];
+	char level[100];
+	char description[100];
+	PACKAGE* package;
+
 	printf("Add new package...\n");
+	printf("Enter name        : ");
+	scanf(" %99[^\n]", name);
+	FLUSH;
+
+	// search hash for unique before continuing
+
+
+	printf("Enter version     : ");
+	scanf(" %99[^\n]", version);
+	FLUSH;
+	printf("Enter level       : ");
+	scanf(" %99[^\n]", level);
+	FLUSH;
+	printf("Enter description : ");
+	scanf(" %99[^\n]", description);
+	FLUSH;
+
+	package = allocatePackage( name, version, level, description );
+	BST_Insert (listHeader, package); // insert to Tree function goes here
+	insertHash (listHeader, package);
+	(listHeader->count)++;
+
 	return;
 }
 
@@ -177,7 +205,19 @@ void menu_AddPackage ( HEADER* listHeader )
 */
 void menu_DeletePackage ( HEADER* listHeader )
 {
+	char searchName[100];
+	PACKAGE* found;
+
 	printf("Delete package...\n");
+	userPackage(searchName);
+	BST_Delete ( listHeader, searchName);
+	if(deleteHash (listHeader, searchName))
+		printf("Deleted\n");
+	else printf("Not found\n");// delete hash
+	
+	
+	// delete BST node
+
 	return;
 }
 

@@ -128,7 +128,7 @@ int insertHash (HEADER* listHeader, PACKAGE* package)
 */
 int deleteHash (HEADER* listHeader, char *packageName)
 {
-	//	Local Definitions
+	//	Local Definitionsd
 	int index;
 	int success = 0;
 	int i = 0;
@@ -140,6 +140,10 @@ int deleteHash (HEADER* listHeader, char *packageName)
 	{
 		if(strcmp( listHeader->hashAry[index].bucket[i]->name, packageName ) == 0 )
 		{
+			free (listHeader->hashAry[index].bucket[i]->description);
+			free (listHeader->hashAry[index].bucket[i]->level);
+			free (listHeader->hashAry[index].bucket[i]->name);
+			free (listHeader->hashAry[index].bucket[i]->version);
 			free (listHeader->hashAry[index].bucket[i]);
 			while(i < listHeader->hashAry[index].buckets_used - 1)
 			{

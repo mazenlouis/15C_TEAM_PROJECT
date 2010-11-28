@@ -22,10 +22,10 @@ main.h - main header
 
 // Data Structures
 typedef struct package {
-	char *name;  // software package title – primary key
-	char *version; // version
-	char *level; // indicates license and level of support
-	char *description;  // software description
+	char *name;			// software package title – primary key
+	char *version;		// version
+	char *level;		// indicates license and level of support
+	char *description;	// software description
 } PACKAGE;
 
 typedef struct hash {
@@ -40,12 +40,12 @@ typedef struct node {
 } BSTNODE;
 
 typedef struct header {
-	int count;  // number of packages
-	int hashArySize;  // hash array size - should be a prime number
-	int bucketSize; // max number of buckets per hash
-	int primaryBuckets;
-	HASH *hashAry; // ptr to hash table
-	BSTNODE *treeRoot;  // ptr to BST
+	int count;			// number of packages
+	int hashArySize;	// hash array size - should be a prime number
+	int bucketSize;		// max number of buckets per hash
+	int primaryBuckets;	// number of primary buckets used ie bucket 0
+	HASH *hashAry;		// ptr to hash table
+	BSTNODE *treeRoot;	// ptr to BST
 } HEADER;
 
 // Function Prototypes
@@ -90,6 +90,7 @@ void		listTree ( HEADER* listHeader );
 void		printTree ( HEADER* listHeader );
 int			BST_Count (HEADER* listHeader);
 BSTNODE* destroyBST ( HEADER* listHeader );
+int BST_Delete (HEADER* listHeader, char* dltKey);
 
 // File I/O Functions
 void loadData ( HEADER* listHeader );
