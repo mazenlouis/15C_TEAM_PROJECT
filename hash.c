@@ -177,7 +177,7 @@ PACKAGE* hashSearch (HEADER* listHeader, char *packageName)
 
 	while(i < listHeader->hashAry[index].buckets_used)
 	{
-		if(strcmp( listHeader->hashAry[index].bucket[i]->name, packageName ) == 0 );
+		if(strcmp( listHeader->hashAry[index].bucket[i]->name, packageName ) == 0 )
 			return listHeader->hashAry[index].bucket[i];
 		i++;
 	}
