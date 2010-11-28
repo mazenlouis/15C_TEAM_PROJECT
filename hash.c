@@ -3,30 +3,26 @@
 // #includes
 #include "main.h"
 
-/* ============================ hashKey =======================
+
+/* ============================ djb2HAsh =======================
 	Hashes a string to an index int within range of listHeader->hashArySize
+	Borrowed from http://www.cse.yorku.ca/~oz/hash.html
 	   PRE  : listHeader - ptr to HEAEDER
 			packageName - ptr to string
 	   POST : 
 	   RETURNS : returns int to index
 */
-int hashKey ( HEADER *listHeader, char *packageName )
+int djb2HAsh ( HEADER *listHeader, char *packageName )
 {
 	//	Local Definitions
-	int index = 0;
-	int i = 0;
+	unsigned long hash = 5381;
+	int c;
 
 	//	Statements
-
-	while ( packageName[i] != '\0' )
-	{
-		index = index + packageName[i];
-		i++;
-	}
-	return index % listHeader->hashArySize;
+	while (c = *packageName++)
+		hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+	return hash % listHeader->hashArySize;
 }
-
-
 
 /* ============================ createHash =======================
 	Creates a hash table (size *2)-> next prime number and sets all
@@ -104,7 +100,7 @@ int insertHash (HEADER* listHeader, PACKAGE* package)
 	int success = 0;
 
 	//	Statements
-	index =  hashKey ( listHeader, package->name );
+	index =  djb2HAsh ( listHeader, package->name );
 	if (loadFactor(listHeader) > HASH_MAX)
 	{
 		reHash(listHeader);
@@ -138,7 +134,7 @@ int deleteHash (HEADER* listHeader, char *packageName)
 	int i = 0;
 	
 	//	Statements
-	index =  hashKey ( listHeader, packageName);
+	index =  djb2HAsh ( listHeader, packageName);
 	
 	while(i < listHeader->hashAry[index].buckets_used && !success)
 	{
@@ -173,7 +169,7 @@ PACKAGE* hashSearch (HEADER* listHeader, char *packageName)
 	int i = 0;
 	
 	//	Statements
-	index =  hashKey ( listHeader, packageName );
+	index =  djb2HAsh ( listHeader, packageName );
 
 	while(i < listHeader->hashAry[index].buckets_used)
 	{
@@ -311,13 +307,13 @@ int binarySearch (int  list[],
 				longestLL - int ptr to longest link list
 		Returns: void
 */
-void calcHashEff( HEADER* listHeader, float *loadFactor, int *longestBuckets, int *numberOfCollisions )
+void calcHashEff( HEADER* listHeader, float *load, int *longestBuckets, int *numberOfCollisions )
 {
 	//	Local Definition
 	int index;
 
 	//	Statements
-	*loadFactor =  0.0;
+	*load =  0.0;
 	*longestBuckets = *numberOfCollisions = 0;
 
 	for(index = 0; index < listHeader->hashArySize; index++)
@@ -328,7 +324,6 @@ void calcHashEff( HEADER* listHeader, float *loadFactor, int *longestBuckets, in
 			(*numberOfCollisions)++;
 	}
 	
-	*loadFactor = (float)listHeader->count / (float)listHeader->hashArySize;
-
+	*load = loadFactor ( listHeader );
 	return;
 } // calcHashEff

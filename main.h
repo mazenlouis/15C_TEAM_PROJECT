@@ -67,7 +67,7 @@ void menu_WriteToFile ( HEADER* listHeader );
 void menu_CalcEff ( HEADER* listHeader );
 
 // Hash Functions
-int hashKey ( HEADER *listHeader, char *packageName );
+int djb2HAsh ( HEADER *listHeader, char *packageName );
 void createHash ( HEADER* listHeader, int size );
 int insertHash ( HEADER* listHeader, PACKAGE* package );
 int deleteHash ( HEADER* listHeader, char *packageName );
