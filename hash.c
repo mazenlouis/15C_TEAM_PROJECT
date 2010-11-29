@@ -67,6 +67,10 @@ void createHash ( HEADER* listHeader, int size )
 	
 	if (primes[locn] < tableSize)
 	{
+		if (primes[locn] == primes[167])
+		{
+			MEM_ERR;
+		}
 		locn++;
 	}
 	
@@ -325,7 +329,7 @@ void calcHashEff( HEADER* listHeader, float *load, int *longestBuckets, int *num
 		if(listHeader->hashAry[index].buckets_used > *longestBuckets)
 			*longestBuckets = listHeader->hashAry[index].buckets_used;
 		if(listHeader->hashAry[index].buckets_used > 1)
-			(*numberOfCollisions)++;
+			*numberOfCollisions += listHeader->hashAry[index].buckets_used - 1;
 	}
 	
 	*load = loadFactor ( listHeader );
