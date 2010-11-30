@@ -190,7 +190,7 @@ void menu_AddPackage ( HEADER* listHeader )
 	FLUSH;
 
 	package = allocatePackage( name, version, level, description );
-	BST_Insert (listHeader, package); // insert to Tree function goes here
+	BST_Insert (listHeader, package); 
 	insertHash (listHeader, package);
 	(listHeader->count)++;
 
@@ -206,18 +206,15 @@ void menu_AddPackage ( HEADER* listHeader )
 void menu_DeletePackage ( HEADER* listHeader )
 {
 	char searchName[100];
-	PACKAGE* found;
 
 	printf("Delete package...\n");
 	userPackage(searchName);
-	BST_Delete ( listHeader, searchName);
-	if(deleteHash (listHeader, searchName))
+	if(BST_Delete ( listHeader, searchName))
+	{
+		deleteHash (listHeader, searchName);
 		printf("Deleted\n");
+	}
 	else printf("Not found\n");// delete hash
-	
-	
-	// delete BST node
-
 	return;
 }
 
@@ -252,7 +249,7 @@ void menu_Search ( HEADER* listHeader )
 void menu_ListUnsorted ( HEADER* listHeader )
 {
 	printf("List unsorted...\n");
-	listHash ( listHeader );
+	listHash ( listHeader , printPackage );
 	return;
 }
 

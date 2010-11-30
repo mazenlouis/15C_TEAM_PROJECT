@@ -196,7 +196,7 @@ PACKAGE* hashSearch (HEADER* listHeader, char *packageName)
 	   POST : prints hash table
 	   RETURNS : 
 */
-void listHash ( HEADER* listHeader )
+void listHash ( HEADER* listHeader, void (*process) (PACKAGE* package) )
 {
 	//	Local Definitions
 	int hashCt;
@@ -207,7 +207,7 @@ void listHash ( HEADER* listHeader )
 	{
 		for (bktCt = 0; bktCt < listHeader->hashAry[hashCt].buckets_used; bktCt++)
 		{
-			printf("%s\n", listHeader->hashAry[hashCt].bucket[bktCt]->name);
+			process(listHeader->hashAry[hashCt].bucket[bktCt]);
 		}
 	}
 	return;

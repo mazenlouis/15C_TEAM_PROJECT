@@ -41,7 +41,7 @@ void printEff ( HEADER* listHeader )
 {
 	// Local Definitions
 	float loadFactor = 0.0;
-	int longestBuckets = 0.0;
+	int longestBuckets = 0;
 	int numberOfCollisions = 0;
 
 	// Statements

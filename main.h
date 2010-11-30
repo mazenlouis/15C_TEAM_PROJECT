@@ -72,7 +72,7 @@ void createHash ( HEADER* listHeader, int size );
 int insertHash ( HEADER* listHeader, PACKAGE* package );
 int deleteHash ( HEADER* listHeader, char *packageName );
 PACKAGE* hashSearch ( HEADER* listHeader, char *packageName );
-void listHash ( HEADER* listHeader );
+void listHash ( HEADER* listHeader, void (*process) (PACKAGE* package) );
 void reHash ( HEADER* listHeader );
 float loadFactor ( HEADER* listHeader );
 HASH* destroyHash ( HEADER* listHeader );
