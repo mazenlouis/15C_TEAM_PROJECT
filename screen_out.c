@@ -43,14 +43,16 @@ void printEff ( HEADER* listHeader )
 	float loadFactor = 0.0;
 	int longestBuckets = 0;
 	int numberOfCollisions = 0;
+	int rehashCount = 0;
 
 	// Statements
-	calcHashEff ( listHeader, &loadFactor, &longestBuckets, &numberOfCollisions );
+	calcHashEff ( listHeader, &loadFactor, &longestBuckets, &numberOfCollisions, &rehashCount );
 	printf("Hash Efficiency\n");
 	printf("=======================================\n");
 	printf("Load Factor            :  %.2f\n", loadFactor);
 	printf("Longest Bucket         :  %d\n", longestBuckets);
 	printf("Number of Collisions   :  %d\n", numberOfCollisions);
+	printf("Rehash Count           :  %d\n", rehashCount);
 
 	return;
 } // printEff

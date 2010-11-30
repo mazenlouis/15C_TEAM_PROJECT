@@ -256,7 +256,7 @@ void reHash ( HEADER* listHeader )
 			}
 		}
 	}
-
+	(listHeader->rehashCount)++;
 	free (tempAry);
 	return;
 }
@@ -313,9 +313,10 @@ int binarySearch (int  list[],
 		Post:	primePct - float ptr to Percentage of prime area filled
 				avgLLnodes - float ptr to Avg nodes in linked lists
 				longestLL - int ptr to longest link list
+				rehashCount - int ptr to number of time table has been rehashed
 		Returns: void
 */
-void calcHashEff( HEADER* listHeader, float *load, int *longestBuckets, int *numberOfCollisions )
+void calcHashEff( HEADER* listHeader, float *load, int *longestBuckets, int *numberOfCollisions, int *rehashCount )
 {
 	//	Local Definition
 	int index;
@@ -331,7 +332,7 @@ void calcHashEff( HEADER* listHeader, float *load, int *longestBuckets, int *num
 		if(listHeader->hashAry[index].buckets_used > 1)
 			*numberOfCollisions += listHeader->hashAry[index].buckets_used - 1;
 	}
-	
+	*rehashCount = listHeader->rehashCount;
 	*load = loadFactor ( listHeader );
 	return;
 } // calcHashEff

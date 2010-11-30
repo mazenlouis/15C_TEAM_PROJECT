@@ -41,6 +41,7 @@ typedef struct node {
 
 typedef struct header {
 	int count;			// number of packages
+	int rehashCount;
 	int hashArySize;	// hash array size - should be a prime number
 	int bucketSize;		// max number of buckets per hash
 	int primaryBuckets;	// number of primary buckets used ie bucket 0
@@ -77,7 +78,7 @@ void reHash ( HEADER* listHeader );
 float loadFactor ( HEADER* listHeader );
 HASH* destroyHash ( HEADER* listHeader );
 int binarySearch (int  list[], int last, int target, int *locn);
-void calcHashEff( HEADER* listHeader, float *loadFactor, int *longestBuckets, int *numberOfCollisions );
+void calcHashEff( HEADER* listHeader, float *loadFactor, int *longestBuckets, int *numberOfCollisions, int *rehashCount );
 
 //BST Functions
 BSTNODE*	BSTNODE_Create ( );

@@ -150,6 +150,7 @@ HEADER* initHashBST ( void )
 	listHeader->count = 0;
 	listHeader->bucketSize = BUCKETSIZE;
 	listHeader->hashArySize = 0;
+	listHeader->rehashCount = 0;
 
 	listHeader->hashAry = NULL;
 	listHeader->treeRoot = NULL;
