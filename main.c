@@ -188,9 +188,16 @@ void menu_AddPackage ( HEADER* listHeader )
 	if(!(hashSearch ( listHeader, name)) )
 	{
 		package = allocatePackage( name, version, level, description );
-		BST_Insert (listHeader, package); 
-		insertHash (listHeader, package);
-		(listHeader->count)++;
+		if (insertHash (listHeader, package))
+		{
+			BST_Insert (listHeader, package); 
+			(listHeader->count)++;
+		}
+		else
+		{
+				printf("Bucket is Full\n");
+				free(package);
+		}
 	}
 	else printf("Discarding Non-Unique Package\n");
 	return;

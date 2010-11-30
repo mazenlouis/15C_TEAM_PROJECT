@@ -26,8 +26,10 @@ void loadData ( HEADER* listHeader )
 		MEM_ERR;
 	
 	while((tempC = fgetc(fpIn)) != EOF)
+	{
 		if(tempC == '\n')
 			size++;
+	}
 
 	rewind(fpIn);
 	createHash ( listHeader, size);
@@ -38,9 +40,16 @@ void loadData ( HEADER* listHeader )
 			if(!(hashSearch ( listHeader, packageNameTemp)) )
 			{
 				package = allocatePackage(packageNameTemp, versionTemp, levelTemp, descriptionTemp);
-				BST_Insert (listHeader, package);
-				insertHash (listHeader, package);
-				(listHeader->count)++;
+				if (insertHash (listHeader, package))
+				{
+					BST_Insert (listHeader, package); 
+					(listHeader->count)++;
+				}
+				else
+				{
+						printf("Bucket is Full\n");
+						free(package);
+				}
 			}
 			else printf("Discarding Non-Unique Package\n");
 		}	
