@@ -49,7 +49,7 @@ void printEff ( HEADER* listHeader )
 	calcHashEff ( listHeader, &loadFactor, &longestBuckets, &numberOfCollisions, &rehashCount );
 	printf("Hash Efficiency\n");
 	printf("=======================================\n");
-	printf("Load Factor            :  %.2f\n", loadFactor);
+	printf("Load Factor            :  %.2f%%\n", loadFactor);
 	printf("Longest Bucket         :  %d\n", longestBuckets);
 	printf("Number of Collisions   :  %d\n", numberOfCollisions);
 	printf("Rehash Count           :  %d\n", rehashCount);
