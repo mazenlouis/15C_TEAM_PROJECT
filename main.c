@@ -63,8 +63,8 @@ void printMenu( void )
 
 /* ============================ menuManager =======================
 	Process user's option by calling appropriate functions.
-	   PRE  : 
-	   POST : 
+	   PRE  : nothing
+	   POST : user option function run
 */
 void menuManager( HEADER* listHeader )
 {
@@ -110,8 +110,8 @@ void menuManager( HEADER* listHeader )
 
 /* ============================ getChar =======================
 	Gets char from user and returns it
-	   PRE  : 
-	   POST : 
+	   PRE  : nothing
+	   POST : option - char from user input
 	   RETURNS : option - char from user input
 */
 char getChar ( void )
@@ -134,8 +134,8 @@ char getChar ( void )
 
 /* ============================ initHashBST =======================
 	Allocates a header and initializes default values
-	   PRE  : 
-	   POST : 
+	   PRE  : nothing
+	   POST : initilized header
 	   RETURNS : ptr to allocated header struct
 */
 HEADER* initHashBST ( void )
@@ -160,8 +160,8 @@ HEADER* initHashBST ( void )
 
 /* ============================ menu_AddPackage =======================
 	Calls libary functions to add a package
-	   PRE  : 
-	   POST : 
+	   PRE  : listHeader - empty/partially full
+	   POST : listHeader - partially full, new package added
 	   RETURNS : 
 */
 void menu_AddPackage ( HEADER* listHeader )
@@ -206,8 +206,8 @@ void menu_AddPackage ( HEADER* listHeader )
 
 /* ============================ menu_DeletePackage =======================
 	Calls libary functionsto delete a package
-	   PRE  : 
-	   POST : 
+	   PRE  : nothing
+	   POST : listHeader - partially full/empty listHeader
 	   RETURNS : 
 */
 void menu_DeletePackage ( HEADER* listHeader )
@@ -227,8 +227,8 @@ void menu_DeletePackage ( HEADER* listHeader )
 
 /* ============================ menu_Search =======================
 	Calls libary functions to search a hash table for a package
-	   PRE  : 
-	   POST : 
+	   PRE  : listHeader - listHeader with pointers to BST/Hash to be searched
+	   POST : printed message/package to screen
 	   RETURNS : 
 */
 void menu_Search ( HEADER* listHeader )
@@ -249,8 +249,8 @@ void menu_Search ( HEADER* listHeader )
 
 /* ============================ menu_ListUnsorted =======================
 	Calls libary functions to print the hash table which is unsorted
-	   PRE  : 
-	   POST : 
+	   PRE  : listHeader - partially full/empty listHeader
+	   POST : printed packages from Hash Table to screen
 	   RETURNS : 
 */
 void menu_ListUnsorted ( HEADER* listHeader )
@@ -262,8 +262,8 @@ void menu_ListUnsorted ( HEADER* listHeader )
 
 /* ============================ menu_ListSorted =======================
 	Calls libary functions to print the binary search tree which is sorted
-	   PRE  : 
-	   POST : 
+	   PRE  : listHeader - partially full/empty listHeader
+	   POST : printed packages from BST to screen
 	   RETURNS : 
 */
 void menu_ListSorted ( HEADER* listHeader )
@@ -275,8 +275,8 @@ void menu_ListSorted ( HEADER* listHeader )
 
 /* ============================ menu_PrintTree =======================
 	Calls libary functions to print the BST in an indented format
-	   PRE  : 
-	   POST : 
+	   PRE  : listHeader - partially full/empty listHeader
+	   POST : prints BST to screen in indented form
 	   RETURNS : 
 */
 void menu_PrintTree ( HEADER* listHeader )
@@ -288,7 +288,7 @@ void menu_PrintTree ( HEADER* listHeader )
 
 /* ============================ menu_WriteToFile =======================
 	Calls libary functions to write the packages to a file
-	   PRE  : 
+	   PRE  : listHeader - partially full/empty listHeader
 	   POST : 
 	   RETURNS : 
 */
@@ -300,7 +300,7 @@ void menu_WriteToFile ( HEADER* listHeader )
 
 /* ============================ menu_CalcEff =======================
 	Calls libary functions to calculate and print hash table efficiency
-	   PRE  : 
+	   PRE  : listHeader - partially full/empty listHeader
 	   POST : 
 	   RETURNS : 
 */
