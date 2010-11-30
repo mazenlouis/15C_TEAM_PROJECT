@@ -23,7 +23,7 @@ void printPackage ( PACKAGE* ptrPackage )
 */
 void userPackage (char* searchName )
 {
-	printf("What is the name of the package you would like to search for --> ");
+	printf("Enter Package Name: ");
 	scanf(" %99[^\n]", searchName);
 	FLUSH;
 	

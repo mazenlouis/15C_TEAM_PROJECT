@@ -35,10 +35,14 @@ void loadData ( HEADER* listHeader )
 	{
 		if( parseLine( line, packageNameTemp, versionTemp, levelTemp, descriptionTemp ))
 		{
-			package = allocatePackage(packageNameTemp, versionTemp, levelTemp, descriptionTemp);
-			BST_Insert (listHeader, package); // insert to Tree function goes here
-			insertHash (listHeader, package);
-			(listHeader->count)++;
+			if(!(hashSearch ( listHeader, packageNameTemp)) )
+			{
+				package = allocatePackage(packageNameTemp, versionTemp, levelTemp, descriptionTemp);
+				BST_Insert (listHeader, package);
+				insertHash (listHeader, package);
+				(listHeader->count)++;
+			}
+			else printf("Discarding Non-Unique Package\n");
 		}	
 	}
 	fclose(fpIn);

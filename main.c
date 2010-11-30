@@ -175,10 +175,6 @@ void menu_AddPackage ( HEADER* listHeader )
 	printf("Enter name        : ");
 	scanf(" %99[^\n]", name);
 	FLUSH;
-
-	// search hash for unique before continuing
-
-
 	printf("Enter version     : ");
 	scanf(" %99[^\n]", version);
 	FLUSH;
@@ -189,11 +185,14 @@ void menu_AddPackage ( HEADER* listHeader )
 	scanf(" %99[^\n]", description);
 	FLUSH;
 
-	package = allocatePackage( name, version, level, description );
-	BST_Insert (listHeader, package); 
-	insertHash (listHeader, package);
-	(listHeader->count)++;
-
+	if(!(hashSearch ( listHeader, name)) )
+	{
+		package = allocatePackage( name, version, level, description );
+		BST_Insert (listHeader, package); 
+		insertHash (listHeader, package);
+		(listHeader->count)++;
+	}
+	else printf("Discarding Non-Unique Package\n");
 	return;
 }
 
